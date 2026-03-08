@@ -1,140 +1,162 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>Chúc mừng 8/3</title>
+    <meta charset="UTF-8">
+    <title>Chúc mừng 8/3</title>
 
-<style>
+    <style>
 
-body{
-margin:0;
-font-family:Arial;
-text-align:center;
-height:100vh;
-overflow:hidden;
-background:linear-gradient(135deg,#ff758c,#ff7eb3);
-color:white;
-}
+        body {
+            margin: 0;
+            font-family: Arial;
+            text-align: center;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg,#ff758c,#ff7eb3);
+            color: white;
+        }
 
-.container{
-margin-top:120px;
-}
+        .container {
+            margin-top: 120px;
+        }
 
-h1{
-font-size:40px;
-}
+        h1 {
+            font-size: 40px;
+        }
 
-#message{
-margin-top:40px;
-font-size:28px;
-}
+        input {
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 10px;
+            border: none;
+        }
 
-/* tim bay */
+        button {
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background: #ff4d6d;
+            color: white;
+            cursor: pointer;
+        }
 
-.heart{
-position:absolute;
-color:red;
-font-size:20px;
-animation:bay 5s linear infinite;
-}
+        #message {
+            margin-top: 40px;
+            font-size: 28px;
+        }
 
-@keyframes bay{
-0%{
-transform:translateY(0) scale(1);
-opacity:1;
-}
+        /* tim bay */
 
-100%{
-transform:translateY(-800px) scale(2);
-opacity:0;
-}
-}
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: bay 5s linear infinite;
+        }
 
-</style>
+        @keyframes bay {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-800px) scale(2);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-<h1>💐 Chúc mừng ngày 8/3 💐</h1>
+        <h1>💐 Chúc mừng ngày 8/3 💐</h1>
 
-<div id="message"></div>
+        <input id="name" placeholder="Nhập tên vào đây">
+        <button onclick="chuc()">Gửi lời chúc</button>
 
-</div>
+        <div id="message"></div>
 
-<audio id="music" src="music.mp3" loop></audio>
+    </div>
 
-<script>
+    <!-- nhạc -->
+    <audio id="music" src="music.mp3" loop></audio>
 
-/* hiệu ứng chữ */
+    <script>
 
-function typeWriter(text){
+        function chuc() {
 
-let i=0;
-let speed=50;
+            let ten = document.getElementById("name").value;
 
-function typing(){
+            let text = "Chúc " + ten + " 8/3 vui vẻ, hạnh phúc và ngập tràn niềm vui nha ❤️";
 
-if(i<text.length){
+            /* hiện chữ */
+            typeWriter(text);
 
-document.getElementById("message").innerHTML+=text.charAt(i);
+            /* phát nhạc */
+            let music = document.getElementById("music");
+            music.currentTime = 0;
+            music.play();
 
-i++;
+        }
 
-setTimeout(typing,speed);
 
-}
+        /* hiệu ứng chữ */
 
-}
+        function typeWriter(text) {
 
-typing();
+            let i = 0;
+            let speed = 50;
 
-}
+            document.getElementById("message").innerHTML = "";
 
-/* khi mở web */
+            function typing() {
 
-window.onload=function(){
+                if (i < text.length) {
 
-let text="Chúc mọi người 8/3 vui vẻ, hạnh phúc và ngập tràn niềm vui nha ❤️";
+                    document.getElementById("message").innerHTML += text.charAt(i);
 
-typeWriter(text);
+                    i++;
 
-let music=document.getElementById("music");
+                    setTimeout(typing, speed);
 
-music.currentTime=0;
+                }
 
-music.play();
+            }
 
-}
+            typing();
 
-/* tim bay */
+        }
 
-setInterval(function(){
 
-let heart=document.createElement("div");
+        /* tạo tim bay */
 
-heart.className="heart";
+        setInterval(function () {
 
-heart.innerHTML="❤️";
+            let heart = document.createElement("div");
 
-heart.style.left=Math.random()*100+"%";
+            heart.className = "heart";
 
-heart.style.bottom="0px";
+            heart.innerHTML = "❤️";
 
-heart.style.fontSize=(20+Math.random()*30)+"px";
+            heart.style.left = Math.random() * 100 + "%";
 
-document.body.appendChild(heart);
+            heart.style.bottom = "0px";
 
-setTimeout(()=>{
+            heart.style.fontSize = (20 + Math.random() * 30) + "px";
 
-heart.remove();
+            document.body.appendChild(heart);
 
-},5000);
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
 
-},300);
+        }, 300);
 
-</script>
+    </script>
 
 </body>
 </html>
