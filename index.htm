@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chúc mừng 8/3</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            text-align: center;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg,#ff758c,#ff7eb3);
+            color: white;
+        }
+
+        .container {
+            margin-top: 120px;
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background: #ff4d6d;
+            color: white;
+            cursor: pointer;
+        }
+
+        #message {
+            margin-top: 40px;
+            font-size: 28px;
+        }
+
+        /* tim bay */
+
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: bay 5s linear infinite;
+        }
+
+        @keyframes bay {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-800px) scale(2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>💐 Chúc mừng ngày 8/3 💐</h1>
+
+        <input id="name" placeholder="Nhập tên vào đây">
+        <button onclick="chuc()">Gửi lời chúc</button>
+
+        <div id="message"></div>
+
+    </div>
+
+    <!-- nhạc -->
+    <audio id="music" src="music.mp3" loop></audio>
+
+    <script>
+
+        function chuc() {
+
+            let ten = document.getElementById("name").value;
+
+            let text = "Chúc " + ten + " 8/3 vui vẻ, hạnh phúc và ngập tràn niềm vui nha ❤️";
+
+            /* hiện chữ */
+            typeWriter(text);
+
+            /* phát nhạc */
+            let music = document.getElementById("music");
+            music.currentTime = 0;
+            music.play();
+
+        }
+
+
+        /* hiệu ứng chữ */
+
+        function typeWriter(text) {
+
+            let i = 0;
+            let speed = 50;
+
+            document.getElementById("message").innerHTML = "";
+
+            function typing() {
+
+                if (i < text.length) {
+
+                    document.getElementById("message").innerHTML += text.charAt(i);
+
+                    i++;
+
+                    setTimeout(typing, speed);
+
+                }
+
+            }
+
+            typing();
+
+        }
+
+
+        /* tạo tim bay */
+
+        setInterval(function () {
+
+            let heart = document.createElement("div");
+
+            heart.className = "heart";
+
+            heart.innerHTML = "❤️";
+
+            heart.style.left = Math.random() * 100 + "%";
+
+            heart.style.bottom = "0px";
+
+            heart.style.fontSize = (20 + Math.random() * 30) + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+
+        }, 300);
+
+    </script>
+
+</body>
+</html>
